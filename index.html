@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>IMPOSSIBLE MAZE 🌀</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Load Three.js from official stable CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <!-- 3D Canvas container -->
+  <div id="game-container"></div>
+
+  <!-- Vignette, Flash & Jumpscare Overlays -->
+  <div id="horror-vignette"></div>
+  <div id="flash-overlay"></div>
+  <div id="static-overlay"></div>
+  <div id="whisper-text"></div>
+  <div id="crosshair">+</div>
+
+  <!-- Extreme Jumpscare Screen Overlay -->
+  <div id="jumpscare-overlay" class="hidden">
+    <div id="jumpscare-face"></div>
+    <div id="jumpscare-caption">IT FOUND YOU.</div>
+  </div>
+
+  <!-- HUD Overlay -->
+  <div id="hud">
+    <div class="hud-top">
+      <div class="hud-card">
+        <span class="hud-label">LEVEL</span>
+        <span class="hud-val" id="hud-level">1 / 3</span>
+      </div>
+      <div class="hud-card">
+        <span class="hud-label">LIVES</span>
+        <span class="hud-val lives-val" id="hud-lives">❤️❤️❤️</span>
+      </div>
+      <div class="hud-card">
+        <span class="hud-label">TIME</span>
+        <span class="hud-val timer-val" id="hud-timer">02:30</span>
+      </div>
+      <div class="hud-card">
+        <span class="hud-label">KEYS</span>
+        <span class="hud-val key-val" id="hud-keys">🗝️ 0 / 1</span>
+      </div>
+      <div class="hud-card mini-btn-group">
+        <button id="btn-pause" title="Pause Game">⏸️</button>
+        <button id="btn-audio" title="Toggle Sound">🔊</button>
+      </div>
+    </div>
+
+    <!-- Compass / Sanity / Shift Warning Indicator -->
+    <div id="hud-bottom-bar">
+      <div id="hud-status">🌀 THE MAZE WATCHES YOU... DON'T TURN AROUND</div>
+    </div>
+  </div>
+
+  <!-- Touch Controls for Mobile/Tablets -->
+  <div id="mobile-controls">
+    <div id="joystick-zone">
+      <div id="joystick-base">
+        <div id="joystick-stick"></div>
+      </div>
+    </div>
+    <div id="mobile-actions">
+      <button id="btn-interact" class="action-btn">E</button>
+      <div class="look-hint">Swipe right screen to turn</div>
+    </div>
+  </div>
+
+  <!-- Start Screen Overlay -->
+  <div id="start-screen" class="modal-overlay">
+    <div class="modal-box">
+      <h1 class="glitch-title">IMPOSSIBLE MAZE <span>🌀</span></h1>
+      <p class="subtitle">A psychological, shifting 3D nightmare</p>
+      
+      <div class="rule-box">
+        <h3>SURVIVAL RULES:</h3>
+        <ul>
+          <li>🗝️ <strong>Find the Golden Key</strong> to unlock the runic portal door.</li>
+          <li>🌀 <strong>NEVER TURN AROUND:</strong> Shifting walls reconstruct reality behind your back!</li>
+          <li>👻 <strong>Beware The Two Horrors:</strong> The Weeping Stalker and The Crimson Screamer stalk the corridors!</li>
+          <li>⚠️ <strong>Deadly Spikes & Teleporting Doors:</strong> Some doors send you to the abyss; some exit gates are traps.</li>
+          <li>⏱️ <strong>Beat the clock & protect your sanity:</strong> Limited lives and ticking clock.</li>
+        </ul>
+      </div>
+
+      <div class="controls-guide">
+        <div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or <kbd>Arrows</kbd> Move</div>
+        <div><kbd>Mouse</kbd> Look around (Pointer Lock)</div>
+        <div><kbd>E</kbd> or Click: Interact / Open Door</div>
+        <div><kbd>Shift</kbd> Sprint | <kbd>P</kbd> Pause</div>
+      </div>
+
+      <button id="btn-start" class="glow-btn">ENTER THE ABYSS</button>
+    </div>
+  </div>
+
+  <!-- Pause Screen Overlay -->
+  <div id="pause-screen" class="modal-overlay hidden">
+    <div class="modal-box small">
+      <h2>MAZE PAUSED</h2>
+      <p>The corridors freeze in silence...</p>
+      <button id="btn-resume" class="glow-btn">RESUME</button>
+      <button id="btn-restart-pause" class="danger-btn">RESTART MAZE</button>
+    </div>
+  </div>
+
+  <!-- Game Over Screen Overlay -->
+  <div id="gameover-screen" class="modal-overlay hidden">
+    <div class="modal-box danger">
+      <h1 class="dead-title">LOST TO THE MAZE</h1>
+      <p id="gameover-reason">Your mind collapsed into the shifting walls.</p>
+      <div class="stats-summary" id="gameover-stats"></div>
+      <button id="btn-retry" class="danger-btn large">TRY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- Victory Screen Overlay -->
+  <div id="victory-screen" class="modal-overlay hidden">
+    <div class="modal-box victory">
+      <h1 class="victory-title">YOU ESCAPED! 🌀</h1>
+      <p>You defied the shifting labyrinth and conquered all levels.</p>
+      <div class="stats-summary" id="victory-stats"></div>
+      <button id="btn-play-again" class="glow-btn large">PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- Audio Synthesizer & Game Scripts -->
+  <script src="audio.js"></script>
+  <script src="maze.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
